@@ -7,6 +7,8 @@ import PromoSection from "./components/PromoSection";
 import PopularProducts from "./components/PopularProducts";
 import DailyBestSells from "./components/DailyBestSells";
 import DealsSection from "./components/DealsSection";
+import ProductTabsSection from "./components/ProductTabsSection";
+import PromoBannerSection from "./components/PromoBannerSection";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <PopularProducts />
       <DailyBestSells />
       <DealsSection />
+      <ProductTabsSection />
+      <PromoBannerSection />
       <Footer />
     </>
   );
