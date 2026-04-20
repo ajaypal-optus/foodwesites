@@ -1,4 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const CategoryMenu = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost/food-api/categories.php")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <li className="nav-item dropdown">
+      <a
+        className="nav-link dropdown-toggle"
+        href="#"
+        data-bs-toggle="dropdown"
+      >
+        Category
+      </a>
+
+      <ul className="dropdown-menu">
+        {categories.length === 0 ? (
+          <li>
+            <span className="dropdown-item">Loading...</span>
+          </li>
+        ) : (
+          categories.map((cat) => (
+            <li key={cat.id}>
+              <a className="dropdown-item" href="#">
+                {cat.name}
+              </a>
+            </li>
+          ))
+        )}
+      </ul>
+    </li>
+  );
+};
+
+const ProductMenu = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost/food-api/products.php")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <li className="nav-item dropdown">
+      <a
+        className="nav-link dropdown-toggle"
+        href="#"
+        data-bs-toggle="dropdown"
+      >
+        Products
+      </a>
+
+      <ul className="dropdown-menu">
+
+        {products.length === 0 ? (
+          <li>
+            <span className="dropdown-item">Loading...</span>
+          </li>
+        ) : (
+          products.map((prod) => (
+            <li key={prod.id}>
+              <a className="dropdown-item" href="#">
+                {prod.name}
+              </a>
+            </li>
+          ))
+        )}
+
+      </ul>
+    </li>
+  );
+};
 
 const TopHeader = () => {
   return (
@@ -28,24 +108,12 @@ const TopHeader = () => {
               <a className="nav-link active" href="#">Home</a>
             </li>
 
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                Category
-              </a>
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">Category 1</a></li>
-                <li><a className="dropdown-item" href="#">Category 2</a></li>
-              </ul>
-            </li>
+            <ul className="navbar-nav">
+              <CategoryMenu />
+            </ul>
 
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                Products
-              </a>
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">Product 1</a></li>
-                <li><a className="dropdown-item" href="#">Product 2</a></li>
-              </ul>
+               <ProductMenu />
             </li>
 
             <li className="nav-item">
